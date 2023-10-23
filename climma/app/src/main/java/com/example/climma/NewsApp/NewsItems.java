@@ -1,9 +1,10 @@
-package NewsApp;
+package com.example.climma.NewsApp;
 
-import javax.xml.transform.Source;
+
 
 public class NewsItems {
-    Source source= null;
+
+    Source source = null;
     String author = "";
     String title = "";
     String description = "";

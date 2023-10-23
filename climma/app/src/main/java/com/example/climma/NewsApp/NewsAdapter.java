@@ -1,4 +1,4 @@
-package NewsApp;
+package com.example.climma.NewsApp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.climma.R;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
@@ -37,13 +37,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
 
         holder.TitleTV.setText(headlines.get(position).getTitle());
-        holder.SourceTV.setText(headlines.get(position).getSource());
+        holder.SourceTV.setText(headlines.get(position).getSource().getName());
 
+        if(headlines.get(position).getUrlToImage()!=null){
+            Picasso.get().load(headlines.get(position).getUrlToImage()).into(holder.imgHeadline);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return headlines.size();
     }
 
 
@@ -59,7 +62,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             TitleTV = itemView.findViewById(R.id.TitleTV);
             SourceTV = itemView.findViewById(R.id.SourceTV);
             imgHeadline = itemView.findViewById(R.id.imgHeadline);
-            cardView = itemView.findViewById(R.id.cardView);
+            cardView = itemView.findViewById(R.id.main_container);
 
 
         }

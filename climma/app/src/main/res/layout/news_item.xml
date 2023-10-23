@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.leanback.widget.BaseCardView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.cardview.widget.CardView android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="460sp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardElevation="8dp"
+    android:layout_margin="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_container"
+    android:background="@color/lb_tv_white">
 
-</androidx.leanback.widget.BaseCardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_margin="6dp">
+
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="1dp"
+           android:layout_margin="8dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="2">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/TitleTV"
+               android:maxLines="3"
+               android:text="Tu pai y tu mai "
+               android:textSize="22sp"
+               android:textStyle="bold"
+               android:textColor="@color/Charcoal_Grey">
+
+           </TextView>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/SourceTV"
+               android:maxLines="1"
+               android:layout_marginTop="6dp"
+               android:textSize="22sp"
+               android:textStyle="bold"
+               android:textColor="@android:color/holo_purple">
+
+           </TextView>
+
+       </LinearLayout>
+        <ImageView
+            android:id="@+id/imgHeadline"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/not_available"
+            android:scaleType="centerCrop"
+            >
+
+        </ImageView>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

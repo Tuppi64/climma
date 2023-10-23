@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
 }*/
 import android.os.Bundle;
 import android.widget.CalendarView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,17 +36,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
+import com.example.climma.NewsApp.NewsAdapter;
+import com.example.climma.NewsApp.NewsApiResponse;
+import com.example.climma.NewsApp.NewsItems;
+import com.example.climma.NewsApp.OnFetchDataListener;
+import com.example.climma.NewsApp.RequestManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 /*
  * Main Activity class that loads {@link MainFragment}.
@@ -58,6 +59,9 @@ public class MainActivity extends FragmentActivity {
     private ArrayList<ExampleItem> mExampleList;
     private RequestQueue mRequestQueue;
     // ^^ Weather App ^^
+
+    private RecyclerView RecyclerNews;
+    private NewsAdapter mNewsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,8 +81,27 @@ public class MainActivity extends FragmentActivity {
         cal.setDate(System.currentTimeMillis(),false,true);
         //Calendar View
 
+        // vvNews Apivv
+        RequestManager manager = new RequestManager(this);
+        manager.getNewsHeadlines(listener, "general", "null");
+        // ^^News Api^^
+
     }
 
+    private final OnFetchDataListener<NewsApiResponse> listener = new OnFetchDataListener<NewsApiResponse>() {
+        @Override
+        public void onfetchData(List<NewsItems> list, String message) {
+
+            showNews(list);
+
+        }
+
+        @Override
+        public void onError(String Message) {
+
+        }
+    };
+//Weather Widget vv
     private void parseJSON(){
         /*String url= "http://api.weatherapi.com/v1/current" +
                 ".json?key=b9a026455d694e49b46130959231110&q=Sabana%20Grande%20PR&aqi=no";*/
@@ -138,6 +161,18 @@ public class MainActivity extends FragmentActivity {
         mRequestQueue.add(request);
 
     }
+    //WeatherWidget^^
+
+    //NewsWidgetvv
+    private void showNews(List<NewsItems> list) {
+        RecyclerNews = findViewById(R.id.News);
+        RecyclerNews.setHasFixedSize(true);
+        RecyclerNews.setLayoutManager(new GridLayoutManager(this, 1));
+        mNewsAdapter = new NewsAdapter(this, list);
+        RecyclerNews.setAdapter(mNewsAdapter);
+
+    }
+    //NewsWidget^^
 
 }
 

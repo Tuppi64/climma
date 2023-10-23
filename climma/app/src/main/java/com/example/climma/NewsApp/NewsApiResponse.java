@@ -1,4 +1,4 @@
-package NewsApp;
+package com.example.climma.NewsApp;
 
 import java.util.List;
 
